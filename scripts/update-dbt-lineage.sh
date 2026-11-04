@@ -2,7 +2,14 @@
 # Regenerate Formula/dbt-lineage.rb from the latest sipemu/dbt-lineage-viewer release.
 set -euo pipefail
 repo="sipemu/dbt-lineage-viewer"
-tag="${1:-$(curl -fsSL "https://api.github.com/repos/$repo/releases/latest" | grep -m1 '"tag_name":' | sed -E 's/.*"(v[^"]+)".*/\1/')}"
+tag="${1:-}"
+if [ -z "$tag" ]; then
+  # Read the whole response first: `curl | grep -m1` dies with SIGPIPE under pipefail.
+  json="$(curl -fsSL "https://api.github.com/repos/$repo/releases/latest")"
+  tag="$(sed -nE 's/.*"tag_name": *"(v[^"]+)".*/\1/p' <<<"$json")"
+  tag="${tag%%$'\n'*}"
+fi
+[ -n "$tag" ] || { echo "could not determine latest release tag" >&2; exit 1; }
 version="${tag#v}"
 base="https://github.com/$repo/releases/download/$tag"
 
