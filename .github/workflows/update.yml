@@ -1,0 +1,40 @@
+name: Update formulae
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag (default latest)
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: scripts/update-dbt-lineage.sh ${{ inputs.tag }}
+      - name: Commit if changed
+        run: |
+          if git diff --quiet; then echo "up to date"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "dbt-lineage $(grep -m1 'version "' Formula/dbt-lineage.rb | cut -d'"' -f2)"
+          git push
+
+  audit:
+    needs: update
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - run: |
+          brew tap-new --no-git local/test
+          cp Formula/dbt-lineage.rb "$(brew --repository)/Library/Taps/local/homebrew-test/Formula/"
+          brew install local/test/dbt-lineage
+          brew test local/test/dbt-lineage
