@@ -2,28 +2,28 @@
 class DbtLineage < Formula
   desc "PR-time dbt lineage, impact analysis and rebuild plans without a warehouse"
   homepage "https://github.com/sipemu/dbt-lineage-viewer"
-  version "0.10.0"
+  version "0.13.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/sipemu/dbt-lineage-viewer/releases/download/v0.10.0/dbt-lineage-v0.10.0-aarch64-apple-darwin.tar.gz"
-      sha256 "48c40e20eb56a496cb53c063681f54f166345cafd2d041276cbd0110bdcd12a6"
+      url "https://github.com/sipemu/dbt-lineage-viewer/releases/download/v0.13.0/dbt-lineage-v0.13.0-aarch64-apple-darwin.tar.gz"
+      sha256 "314923f9698367dd9acd79042ede0926df42bc37b8e6a265d644a4d323e40f15"
     end
     on_intel do
-      url "https://github.com/sipemu/dbt-lineage-viewer/releases/download/v0.10.0/dbt-lineage-v0.10.0-x86_64-apple-darwin.tar.gz"
-      sha256 "9cab7cb5352a3edc5970913d9c78817e046728d797048ce8ce3ced2ae72cdfef"
+      url "https://github.com/sipemu/dbt-lineage-viewer/releases/download/v0.13.0/dbt-lineage-v0.13.0-x86_64-apple-darwin.tar.gz"
+      sha256 "4abbebac6efa0735ada277d9eec30a1d022de2550ab1d93a852e7629101daa8c"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/sipemu/dbt-lineage-viewer/releases/download/v0.10.0/dbt-lineage-v0.10.0-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "c612b93289a315b2def1f4df39149028ca13988dd1e6a6f688cf36968cfa2a76"
+      url "https://github.com/sipemu/dbt-lineage-viewer/releases/download/v0.13.0/dbt-lineage-v0.13.0-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "f50982b4e64754aa6f5d9a0ab8149e107f7239dc991f43984ddf2b9fe1df41e7"
     end
     on_intel do
-      url "https://github.com/sipemu/dbt-lineage-viewer/releases/download/v0.10.0/dbt-lineage-v0.10.0-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "9290ba2ec2248ee376aa439d487ac7a439731d57eee2615a1c98db1c1dc04a8f"
+      url "https://github.com/sipemu/dbt-lineage-viewer/releases/download/v0.13.0/dbt-lineage-v0.13.0-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "2920b4518b5c32f57094b56d5e5adffa87d075b3033f9699b6de4480db934574"
     end
   end
 
